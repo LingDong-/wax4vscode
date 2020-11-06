@@ -12,6 +12,7 @@ let panel:vscode.WebviewPanel|undefined = undefined;
 
 let TARG = 'c';
 let TMP = "/tmp/wax4vscode"
+let LINTTOGGLE = true;
 
 function get_cmds(targ:string,fname:string):any{
   let dname = dirname(fname);
@@ -241,9 +242,14 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(vscode.commands.registerCommand('wax4vscode.ast', () => {
     astprinter(TARG);
   }));
-
+  context.subscriptions.push(vscode.commands.registerCommand('wax4vscode.togglelint', ()=>{
+    LINTTOGGLE = !LINTTOGGLE;
+    vscode.window.setStatusBarMessage("lint turned: "+["OFF","ON"][Number(LINTTOGGLE)],4000);
+  }))
   vscode.workspace.onDidSaveTextDocument(doc=>{
-    linter(TARG);
+    if (LINTTOGGLE){
+      linter(TARG);
+    }
   })
   
 

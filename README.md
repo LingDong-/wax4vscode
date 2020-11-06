@@ -43,6 +43,12 @@ Lint result shown in status bar.
 ![](screenshots/04.png)
 ![](screenshots/05.png)
 
+To toggle lint off, use
+
+```
+⌘⇧P waxc toggle lint on save
+```
+
 
 ### Show Abstract Syntax Tree
 

@@ -30,6 +30,10 @@
 			{
 				"command": "wax4vscode.ast",
 				"title": "waxc print syntax tree"
+			},
+			{
+				"command": "wax4vscode.togglelint",
+				"title": "waxc toggle lint on save"
 			}
 		],
 		"languages": [{

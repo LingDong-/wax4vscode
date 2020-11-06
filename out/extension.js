@@ -10,6 +10,7 @@ const EXITBAD = `<h2 style="color:pink">X</h2>`;
 let panel = undefined;
 let TARG = 'c';
 let TMP = "/tmp/wax4vscode";
+let LINTTOGGLE = true;
 function get_cmds(targ, fname) {
     let dname = dirname(fname);
     let bname = basename(fname);
@@ -235,8 +236,14 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand('wax4vscode.ast', () => {
         astprinter(TARG);
     }));
+    context.subscriptions.push(vscode.commands.registerCommand('wax4vscode.togglelint', () => {
+        LINTTOGGLE = !LINTTOGGLE;
+        vscode.window.setStatusBarMessage("lint turned: " + ["OFF", "ON"][Number(LINTTOGGLE)], 4000);
+    }));
     vscode.workspace.onDidSaveTextDocument(doc => {
-        linter(TARG);
+        if (LINTTOGGLE) {
+            linter(TARG);
+        }
     });
 }
 exports.activate = activate;
