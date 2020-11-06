@@ -1,0 +1,109 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "wax",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#characters"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#macros"
+		},
+		{
+			"include": "#vars"
+		}
+	],
+	"repository": {
+		"comments": {
+			"begin": "(?<!\\\\);",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.wax"
+				}
+			},
+			"end": "$",
+			"name": "comment.line.semicolon.wax"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "storage.type.wax",
+					"match": "\\b(return|result|extern|param|local|while|break|func|then|else|let|for|if|do)\\b"
+				},{
+					"name": "keyword.control.wax",
+					"match": "\\b(insert|remove|alloc|slice|print|call|cast|free|null|get|set|asm)\\b"
+				},{
+					"name": "keyword.control.wax",
+					"match": "(\\<\\<|\\>\\>|\\=|\\&\\&|\\|\\||\\>\\=|\\<\\=|\\<\\>|\\?\\?|\\+|\\-|\\*|\\/|\\^|\\%|\\&|\\||\\!|\\~|\\<|\\>|\\#|\\?)"
+				}
+			]
+		},
+		"types": {
+			"patterns": [{
+				"name": "entity.name.type.wax",
+				"match": "\\b(arr|vec|map|int|float|str|struct)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.wax",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.wax",
+					"match": "\\\\."
+				}
+			]
+		},
+		"characters": {
+			"name": "constant.character.wax",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+				{
+					"name": "constant.character.escape.wax",
+					"match": "\\\\."
+				}
+			]
+		},
+		"macros": {
+			"patterns": [{
+				"name": "meta.preprocessor.wax",
+				"match": "@[A-z]+\\b"
+			}]
+		},
+		"vars": {
+			"patterns": [{
+				"name": "variable.other.wax",
+				"match": "\\b[A-z_][A-z0-9_]*\\b"
+			}]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"match": "(-?\\d+\\.\\d+([eE][+-]?\\d+)?)",
+					"name": "constant.numeric.float.wax"
+				},
+				{
+					"match": "(-?\\d+)",
+					"name": "constant.numeric.int.wax"
+				}
+			]
+		}
+	},
+	"scopeName": "source.wax"
+}
